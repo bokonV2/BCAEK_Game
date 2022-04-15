@@ -1,0 +1,84 @@
+body{
+  color: #ed6814!important;
+}
+.acount{
+  margin: 8px 24px;
+  background-color: #303133;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+
+}
+
+img{
+  border-radius: 100%;
+  margin: 3px;
+  width: 20%;
+}
+
+.acount span{
+  width: 100%;
+  text-align: center;
+  font-size: 1.2em;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  line-height: 15px;
+}
+
+.stats{
+  margin: 8px 12px;
+  padding: 8px;
+  background-color: #303133;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+}
+.stats table{
+  margin-left: 10px;
+}
+.stats td:first-child{
+  color: #B0B0B0;
+}
+.stats td:last-child{
+  text-align: right;
+}
+
+.level{
+  text-align: center;
+}
+
+#svg circle {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1s linear;
+  stroke: #666;
+  stroke-width: 1em;
+}
+#svg #bar {
+  stroke: #FF9F1E;
+}
+#cont {
+  display: block;
+  height: 200px;
+  width: 200px;
+  margin: 2em auto;
+  box-shadow: 0 0 1em black;
+  border-radius: 100%;
+  position: relative;
+}
+#cont:after {
+  position: absolute;
+  display: block;
+  height: 160px;
+  width: 160px;
+  left: 50%;
+  top: 50%;
+  box-shadow: inset 0 0 1em black;
+  content: attr(data-pct)" Уровень";
+  margin-top: -80px;
+  margin-left: -80px;
+  border-radius: 100%;
+  line-height: 160px;
+  font-size: 1.5em;
+  text-shadow: 0 0 0.5em black;
+}

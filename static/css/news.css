@@ -1,0 +1,19 @@
+.main{
+  padding: 8px;
+}
+.message{
+  text-align: center;
+  font-size: 32px;
+}
+.news{
+  margin-top: 10px;
+}
+.news span:first-child{
+  color: orange;
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-left: 10px;
+}
+.news span:last-child{
+  color: white;
+}

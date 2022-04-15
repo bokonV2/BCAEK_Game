@@ -1,0 +1,19 @@
+.main{
+  margin-top: 5vh;
+  padding: 8px;
+}
+.message{
+  text-align: center;
+  font-size: 32px;
+}
+.task{
+  color: #fff;
+}
+.task .title{
+  margin-top: 15px;
+  font-size: 1.1em;
+  font-weight: bold;
+}
+.task .item{
+  padding: 8px;
+}

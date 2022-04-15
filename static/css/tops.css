@@ -1,0 +1,22 @@
+h1 {
+  text-align: center;
+  margin: 20px 0;
+  color: #ed6814;
+}
+img{
+  border-radius: 100%;
+  width: 50%;
+}
+table{
+  margin: 5px;
+  width: calc(100% - 10px);
+  color: #fff;
+  border-collapse: collapse;
+}
+tr td{
+  text-align: center;
+  color: #B0B0B0;
+}
+tr:nth-child(even) {
+  background: #252527;
+}

@@ -1,0 +1,47 @@
+{% extends "master.html" %}
+{% block content %}
+<link rel="stylesheet" href="/static/css/profile.css">
+<script src="/static/js/level.js" type="text/javascript"></script>
+<div class="acount">
+  <img src="{{ inform.image }}">
+  <span>{{ inform.lastname }} {{ inform.name }}</span>
+</div>
+<div class="level">
+  <div id="cont" data-pct="{{ inform.score // 100 }}" data-xp="{{ inform.score % 100 }}">
+    <svg id="svg" width="200" height="200" viewPort="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <circle r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
+      <circle id="bar" r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
+    </svg>
+  </div>
+</div>
+<div class="stats">
+  Балланс:
+  <table>
+    <tr><td>Монеты:</td><td>{{ inform.money }}</td></tr>
+    <tr><td>Опыт:</td><td>{{ inform.score }}</td></tr>
+  </table>
+</div>
+<div class="stats">
+  Потеряно:
+  <table>
+    <tr><td>Монеты:</td><td>{{ inform.lost_money }}</td></tr>
+    <tr><td>Опыт:</td><td>{{ inform.lost_score }}</td></tr>
+  </table>
+</div>
+<div class="stats">
+  Найдено QR:
+  <table>
+    <tr><td>Слабых:</td><td>{{ inform.tinyQR }}</td></tr>
+    <tr><td>Средних:</td><td>{{ inform.mediumQR }}</td></tr>
+    <tr><td>Сильных:</td><td>{{ inform.bigQG }}</td></tr>
+  </table>
+</div>
+<div class="stats">
+  Завершенно:
+  <table>
+    <tr><td>Ежедневных событий:</td><td>{{ inform.day_task }}</td></tr>
+    <tr><td>Ежедневных заданий:</td><td>{{ inform.day_events }}</td></tr>
+    <tr><td>Промокодов:</td><td>{{ inform.promo }}</td></tr>
+  </table>
+</div>
+{% endblock %}

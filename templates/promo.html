@@ -1,0 +1,13 @@
+{% extends "master.html" %}
+{% block content %}
+<link rel="stylesheet" href="/static/css/promo.css">
+<div class="message">
+  Промокод!
+</div>
+<div class="promo">
+  <form action="/promo" method="post">
+    <input type="text" name="code" value=""><br>
+    <input type="submit" value="Отправить">
+  </form>
+</div>
+{% endblock %}

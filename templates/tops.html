@@ -1,0 +1,22 @@
+{% extends "master.html" %}
+{% block content %}
+<link rel="stylesheet" href="/static/css/tops.css">
+<h1>Таблица лидеров</h1>
+<table>
+  <thead>
+    <th>№</th>
+    <th colspan="2">Участник</th>
+    <th>Колличество<br>очков</th>
+  </thead>
+  {% for i, data in inform %}
+    <tr>
+      <td>{{ i + 1 }}</td>
+      <td>
+        <img src="{{ data['image'] }}">
+      </td>
+      <td>{{ data['lastname'] }} {{ data['name'] }}</td>
+      <td>{{ data['score'] }}</td>
+    </tr>
+  {% endfor %}
+</table>
+{% endblock %}

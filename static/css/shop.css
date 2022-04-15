@@ -1,0 +1,49 @@
+h1 {
+  text-align: center;
+  margin: 20px 0;
+  color: #ed6814;
+}
+table{
+  width: 100%;
+  padding: 0 5px;
+}
+.titleShop{
+  color: #ed6814;
+  padding-top: 15px;
+  padding-bottom: 5px;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-align: center;
+}
+tr td:nth-child(2){
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+tr td:nth-child(3){
+  text-align: right;
+}
+td[colspan="2"]{
+  color: gray;
+  font-size: 0.9em;
+  padding: 5px;
+  text-align: left!important;
+}
+td a{
+  padding: 5px;
+  margin: 5px;
+  border: solid 1px #ed6814;
+  border-radius: 5px;
+}
+td span{
+  color: #ed6814;
+}
+.money{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3em;
+}
+.money span{
+  color: #ed6814;
+}

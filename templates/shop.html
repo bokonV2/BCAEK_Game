@@ -1,0 +1,40 @@
+{% extends "master.html" %}
+{% block content %}
+<link rel="stylesheet" href="/static/css/shop.css">
+<h1>Магазин</h1>
+<div class="money">Балланс: &nbsp<span class="material-icons">monetization_on</span>10000</div>
+<table>
+  <tr>
+    <td colspan="3" class="titleShop">Раздел -=- типа</td>
+  </tr>
+  <tr>
+    <td>Товар</td>
+    <td><span class="material-icons">monetization_on</span>10000</td>
+    <td rowspan="2"><a href="/shop/id">Купить</a></td>
+  </tr>
+  <tr>
+    <td colspan="2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum quibusdam vel soluta voluptatem.</td>
+  </tr>
+  <tr>
+    <td>Товар</td>
+    <td><span class="material-icons">monetization_on</span>10000</td>
+    <td rowspan="2"><a href="/shop/id">Купить</a></td>
+  </tr>
+  <tr>
+    <td colspan="2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum quibusdam vel soluta voluptatem.</td>
+  </tr>
+  <tr>
+    <td colspan="3" class="titleShop">Раздел -=- типа</td>
+  </tr>
+  {% for i in inform %}
+  <tr>
+    <td>{{ i.name }}</td>
+    <td><span class="material-icons">monetization_on</span>{{ i.cost }}</td>
+    <td rowspan="2"><a href="/shop/id">Купить</a></td>
+  </tr>
+  <tr>
+    <td colspan="2">{{ i.description }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

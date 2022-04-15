@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Profile</title>
+    <script src="https://vk.com/js/api/openapi.js?169" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <h1>добавить промо</h1>
+    <form class="" action="/addPromo" method="post">
+      <input type="text" name="code" value="">
+      <label for="input">Код</label><br>
+      <input type="number" name="money" value="">
+      <label for="input">Монеты</label><br>
+      <input type="number" name="score" value="">
+      <label for="input">Очки</label><br>
+      <input type="text" name="description" value="">
+      <label for="input">Описание</label><br>
+      <input type="submit" value="Подтв">
+    </form>
+    <br><br>
+    <h1>добавить товар</h1>
+    <form class="" action="/addProd" method="post">
+      <input type="text" name="name" value="">
+      <label for="input">Имя</label><br>
+      <input type="number" name="cost" value="">
+      <label for="input">Стоимость</label><br>
+      <input type="number" name="section" value="">
+      <label for="input">Раздел</label><br>
+      <input type="text" name="description" value="">
+      <label for="input">Описание</label><br>
+      <input type="submit" value="Подтв">
+    </form>
+    <h1>добавить новость</h1>
+    <form class="" action="/addNews" method="post">
+      <input type="text" name="title" value="">
+      <label for="input">Заголовок</label><br>
+      <input type="text" name="description" value="">
+      <label for="input">Описание</label><br>
+      <input type="submit" value="Подтв">
+    </form>
+  </body>
+</html>
