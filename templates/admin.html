@@ -11,13 +11,32 @@
   <body>
     <h1>добавить промо</h1>
     <form class="" action="/addPromo" method="post">
+      <input type="number" name="count" value="1">
+      <label for="input">Количество от 1 до 20</label><br>
+
       <input type="text" name="code" value="">
       <label for="input">Код</label><br>
+
       <input type="number" name="money" value="">
       <label for="input">Монеты</label><br>
+
       <input type="number" name="score" value="">
       <label for="input">Очки</label><br>
+
+      <select name="type" required>
+        <option disabled>Выберите</option>
+        <option value="0">tinyQR</option>
+        <option value="1">mediumQR</option>
+        <option value="2">bigQG</option>
+        <option value="3">day_task</option>
+        <option value="4">day_events</option>
+        <option value="5" Selected >promo</option>
+        <option value="6">lost</option>
+      </select>
+
+      <label for="input">Тип</label><br>
       <input type="text" name="description" value="">
+
       <label for="input">Описание</label><br>
       <input type="submit" value="Подтв">
     </form>

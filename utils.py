@@ -1,4 +1,5 @@
 import requests
+import random
 
 from models import *
 from telegramm import *
@@ -11,13 +12,30 @@ VKTOKEN = f"&access_token={TOKEN}&v={V}"
 client_id = 7982511
 client_secret = "NhpZrbytODiMUN2obpbv"
 redirect_uri = "https://6954-178-168-218-53.ngrok.io/aut"
+site_url="http://192.168.43.134:8000"
+symb=tuple('--abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890')
 
-def add_promo(form):
+def genPromo(length=9):
+    return ''.join([random.choice(symb) for x in range(length)])
+def add_promo(count,code,score, money, type,description):
     Promo.create(
-        promo = form.get("code"), score = form.get("score"),
-        money = form.get("money"), description = form.get("description")
+        promo = code, score = score,
+        money = money, description = description,
+        type = type
     )
-    send_telegram_log(f'LOG:\nНовый промо\n{form.get("code")}\n{form.get("score")}:{form.get("money")}\n{form.get("description")}')
+    send_telegram_log(f'LOG:\nНовый промо\n{code}\n{score}:{money}\n{description}')
+    
+def add_promos(form):
+    count = int(form.get("count"))
+    count = 1 if count<=0 else count
+    count = 20 if count>20 else count
+    if count==1:
+        add_promo(**form)
+    else:
+        form=form.to_dict()
+        for i in range(count):
+            form["code"] = genPromo()
+            add_promo(**form)
 
 def add_prod(form):
     Products.create(
@@ -30,7 +48,7 @@ def add_news(form):
     News.create(
         title = form.get("title"), description = form.get("description")
     )
-    send_telegram_log(f'LOG:\nНовая новость\n{form.get("title")}\n{form.get("description")}')
+    send_telegram_log(f'LOG:\nДобавлена новость\n{form.get("title")}\n{form.get("description")}')
 
 def get_promo():
     return Promo.select().order_by(Promo.id.desc()).dicts()
@@ -59,7 +77,7 @@ def by_shop(user_id, id):
     user.save()
     return True
 
-def check_promo(user_id, code, type=5):
+def check_promo(user_id, code):
     try:
         promo = Promo.get(promo=code)
         if promo.user_id != None:
@@ -69,7 +87,7 @@ def check_promo(user_id, code, type=5):
 
         promo.user_id = user_id
         promo.save()
-        complite(user_id, type, promo.score, promo.money, promo)
+        complite(user_id, promo.type, promo.score, promo.money, promo)
         return (promo.score, promo.money, True)
     except DoesNotExist:
         return False

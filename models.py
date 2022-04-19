@@ -30,6 +30,7 @@ class Promo(BaseModel):
     promo = CharField()
     score = IntegerField()
     money = IntegerField()
+    type = IntegerField()
     description = TextField()
     user_id = IntegerField()
 

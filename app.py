@@ -11,7 +11,7 @@ app.secret_key = "dtrytujet6rrt64"
 def welcome():
     if session['user_id']:
         return redirect('/profile')
-    return render_template('welcome.html')
+    return render_template('welcome.html',enter_url='https://oauth.vk.com/authorize?client_id=7982511&display=mobile&redirect_uri=https://6954-178-168-218-53.ngrok.io/aut&scope=offline&response_type=code&v=5.131')
 
 @app.route('/profile')
 def profile():
@@ -88,8 +88,7 @@ def qr():
 
     complite = check_promo(
         session['user_id'],
-        request.args.get('code'),
-        int(request.args.get('type'))
+        request.args.get('code')
     )
     if complite:
         session['score'], session['money'], session['status'] = complite
@@ -120,7 +119,7 @@ def admin():
 
 @app.route('/addPromo', methods=['GET', 'POST'])
 def addPromo():
-    add_promo(request.form)
+    add_promos(request.form)
     return redirect('/admin')
 
 @app.route('/addProd', methods=['GET', 'POST'])
@@ -149,7 +148,7 @@ def error(e):
 
 @app.before_request
 def before_request():
-    session['user_id'] = 236657896
+    session['user_id'] = 262708494
 
 @app.before_first_request
 def before_first_request():
