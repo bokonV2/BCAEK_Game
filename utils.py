@@ -47,6 +47,18 @@ def get_inform_db(user_id):
 def get_inform_db_2():
     return Users.select().order_by(Users.score.desc()).dicts()
 
+def by_shop(user_id, id):
+    prod = Products.select().where(Products.id == id).get()
+    user = Users.select().where(Users.vk_id == user_id).get()
+
+    if user.money < prod.cost:
+        return False
+
+    user.products = f"{user.products}{id},"
+    user.money -= prod.cost
+    user.save()
+    return True
+
 def check_promo(user_id, code, type=5):
     try:
         promo = Promo.get(promo=code)

@@ -48,7 +48,16 @@ def rules():
 def shop():
     if not session['user_id']:
         return redirect('/profile')
-    return render_template('shop.html', inform=get_prod())
+    return render_template('shop.html', inform=get_prod(),
+        user = get_inform_db(session['user_id']))
+
+@app.route('/shop/<int:id>')
+def shopby(id):
+    if not session['user_id']:
+        return redirect('/profile')
+    confirm = by_shop(session['user_id'], id)
+    return render_template('shop.html', inform=get_prod(), confirm=confirm,
+        user = get_inform_db(session['user_id']), by=True)
 
 @app.route('/task')
 def task():
@@ -132,15 +141,15 @@ def error(e):
     session['user_id'] = False
     return redirect('/welcome')
 
-@app.errorhandler(Exception)
-def error(e):
-    print(e)
-    session['user_id'] = False
-    return redirect('/welcome')
+# @app.errorhandler(Exception)
+# def error(e):
+#     print(e)
+#     session['user_id'] = False
+#     return redirect('/welcome')
 
 @app.before_request
 def before_request():
-    session['user_id'] = 262708494
+    session['user_id'] = 236657896
 
 @app.before_first_request
 def before_first_request():

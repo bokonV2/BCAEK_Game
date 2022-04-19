@@ -2,35 +2,24 @@
 {% block content %}
 <link rel="stylesheet" href="/static/css/shop.css">
 <h1>Магазин</h1>
-<div class="money">Балланс: &nbsp<span class="material-icons">monetization_on</span>10000</div>
+<div class="money">Балланс: &nbsp<span class="material-icons">monetization_on</span>{{ user.money }}</div>
 <table>
-  <tr>
-    <td colspan="3" class="titleShop">Раздел -=- типа</td>
-  </tr>
-  <tr>
-    <td>Товар</td>
-    <td><span class="material-icons">monetization_on</span>10000</td>
-    <td rowspan="2"><a href="/shop/id">Купить</a></td>
-  </tr>
-  <tr>
-    <td colspan="2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum quibusdam vel soluta voluptatem.</td>
-  </tr>
-  <tr>
-    <td>Товар</td>
-    <td><span class="material-icons">monetization_on</span>10000</td>
-    <td rowspan="2"><a href="/shop/id">Купить</a></td>
-  </tr>
-  <tr>
-    <td colspan="2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum quibusdam vel soluta voluptatem.</td>
-  </tr>
-  <tr>
-    <td colspan="3" class="titleShop">Раздел -=- типа</td>
-  </tr>
+  {% if by %}
+    {% if confirm %}
+      <tr>
+        <td colspan="3" class="titleShop">Купленно</td>
+      </tr>
+    {% else %}
+      <tr>
+        <td colspan="3" class="titleShop">Мало деняг</td>
+      </tr>
+    {% endif %}
+  {% endif %}
   {% for i in inform %}
   <tr>
     <td>{{ i.name }}</td>
     <td><span class="material-icons">monetization_on</span>{{ i.cost }}</td>
-    <td rowspan="2"><a href="/shop/id">Купить</a></td>
+    <td rowspan="2"><a href="/shop/{{ i.id }}">Купить</a></td>
   </tr>
   <tr>
     <td colspan="2">{{ i.description }}</td>

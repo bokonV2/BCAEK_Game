@@ -43,6 +43,7 @@ td span{
   justify-content: center;
   align-items: center;
   font-size: 1.3em;
+  margin-bottom: 15px;
 }
 .money span{
   color: #ed6814;
