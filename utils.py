@@ -24,7 +24,7 @@ def add_promo(count,code,score, money, type,description):
         type = type
     )
     send_telegram_log(f'LOG:\nНовый промо\n{code}\n{score}:{money}\n{description}')
-    
+
 def add_promos(form):
     count = int(form.get("count"))
     count = 1 if count<=0 else count
@@ -72,7 +72,7 @@ def by_shop(user_id, id):
     if user.money < prod.cost:
         return False
 
-    user.products = f"{user.products}{id},"
+    user.products = f"{user.products},{id}"
     user.money -= prod.cost
     user.save()
     return True

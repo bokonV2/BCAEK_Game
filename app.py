@@ -117,6 +117,13 @@ def admin():
         return redirect('/welcome')
     return render_template('admin.html')
 
+@app.route('/cart')
+def cart():
+    if not session['user_id'] or\
+     not session['user_id'] in (236657896,262708494):
+        return redirect('/welcome')
+    return render_template('cart.html',inform=enumerate(get_inform_db_2()))
+
 @app.route('/addPromo', methods=['GET', 'POST'])
 def addPromo():
     add_promos(request.form)
