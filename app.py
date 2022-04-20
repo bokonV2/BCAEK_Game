@@ -20,6 +20,10 @@ def profile():
     return render_template('profile.html',
         inform = get_inform_db(session['user_id']))
 
+@app.route('/hashi')
+def hashi():
+    return render_template('hashi.html')
+
 @app.route('/tops')
 def tops():
     if not session['user_id']:

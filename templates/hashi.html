@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="./static/css/hashi.css">
+<link rel="stylesheet" href="./static/css/jquery-ui.css">
+<link href="./static/css/css" rel="stylesheet" type="text/css">
+
+<script type="application/javascript" src="./static/js/fastclick.js"></script>
+<script type="text/javascript" src="./static/js/hashi.js"></script>
+
+<script type="text/javascript">
+if ('addEventListener' in document) {
+    document.addEventListener('DOMContentLoaded', function() {
+        FastClick.attach(document.body);
+    }, false);
+}
+
+</script>
+
+<script src="./static/js/jquery.js"></script>
+<script src="./static/js/jquery-ui.js"></script>
+<script type="text/javascript">
+$( function() {$("#datePicker").datepicker();} );
+</script>
+<title>Hashi Solver and Generator</title>
+</head>
+<body>
+
+<div id="banner">
+Hashi Solver and Generator
+</div>
+<div id="tabContainer">
+<ul id="tabs">
+<li class=""><a href="#tab1">Generator</a></li>
+<li class="active"><a href="#tab2">Solver</a></li>
+<li><a href="#tab3">About</a></li>
+<li><a href="#tab4">FAQ</a></li>
+</ul>
+</div>
+<div id="tabsContent">
+<div id="tab1" class="tab_content" style="display: none;">
+<div id="progressDiv">
+<progress id="genProgress" value="79" max="108" style="display: none;"></progress>
+</div>
+Width: <input type="text" id="genWidthField" value="10" size="2">
+Height: <input type="text" id="genHeightField" value="10" size="2"><br>
+Difficulty:
+Easy<input type="radio" id="easy" name="difficulty" value="easy">
+Medium<input type="radio" id="medium" name="difficulty" value="medium" checked="checked">
+Hard<input type="radio" id="hard" name="difficulty" value="hard">
+<br>
+<input type="hidden" id="generatedPuzzle" size="100" value="10x10:4a4a3a4aa3aaa2a5aa1aaaaaaa1aa46a5a2aaaaaaaaaa4a3aa6a4aaaaaa3a1aa3aaaaaaaaaa3a5a32a1aaaaaaaa2aa4aa4a4">
+<input type="button" value="Generate" id="generateButton" class="button medium" style="display: inline;">
+<input type="button" value="Stop Generation" id="stopGenerationButton" class="button medium" style="display: none;">
+
+
+
+
+<div id="codeDiv">
+Or enter puzzle code:
+<input type="text" id="userPuzzle" size="40">
+<input type="button" value="Display Puzzle" id="displayButton" class="button small">
+</div>
+</div>
+<div id="tab2" class="tab_content" style="display: block;">
+<div id="solveProgressDiv">
+<progress id="solveProgress" value="0" max="220" style="display: none;"></progress>
+</div>
+Enter grid size:
+Width: <input type="text" id="solveWidthField" value="10" size="2">
+Height: <input type="text" id="solveHeightField" value="10" size="2">
+<input type="button" value="Display Grid" id="displayGridButton" class="button small"><br>
+<div id="solveCodeDiv">
+Or enter puzzle code:
+<input type="text" id="userSolvePuzzle" size="40">
+</div>
+<input type="button" value="Solve Puzzle" id="solveButton" class="button medium" style="display: inline;">
+<input type="button" value="Stop Solve" id="stopSolvingButton" class="button medium" style="display: none;">
+</div>
+
+<div id="tab3" class="tab_content" style="display: none;">
+Hashiwokakero, also known as "bridges" or just "hashi", is the latest addition to my collection of puzzle solvers. A work in progress!<br><br>
+
+</div>
+<div id="tab4" class="tab_content" style="display: none;">
+
+How do I input a puzzle to solve?<br><br>
+You don't. Not yet. Sorry! If you really need to solve something, it's not hard to figure out the puzzle format and paste it into the "puzzle code" box.
+Basically, it's something like "4x4:", where the first number is width and the second is height, "3--3-----1-22-1-".
+<br>
+</div>
+</div>
+<br>
+<div id="puzzleInterface">
+<div id="canvasDiv" style="box-shadow: rgb(136, 136, 136) 1px 1px 5px 2px;">
+<canvas id="inputCanvas" class="fastclick" height="412" width="412">Please upgrade to an HTML5 compatible browser</canvas>
+<canvas id="puzzleCanvas" class="fastclick" height="412" width="412"></canvas>
+<canvas id="numberCanvas" class="fastclick" height="412" width="412"></canvas>
+</div>
+<br>
+<script type="text/javascript">
+var canvas = document.querySelector(".fastclick");
+new FastClick(canvas);
+</script>
+<br>
+<div id="buttonsDiv">
+
+<input class="button small" type="button" value="Undo " id="undoButton">
+
+<input class="button small" type="button" value="Clear All" id="clearButton">
+<input class="button small" type="button" value="Check Solution" id="checkButton">
+<input class="button small" type="button" value="Save" id="saveButton">
+<input class="button small" type="button" value="Load" id="loadButton">
+</div>
+</div>
+<br>
+
+
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		init();
+	});
+</script>
+</body></html>
