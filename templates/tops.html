@@ -14,7 +14,7 @@
       <td>
         <img src="{{ data['image'] }}">
       </td>
-      <td>{{ data['lastname'] }} {{ data['name'] }}</td>
+      <td>{{ data['lastname']|safe }} {{ data['name'] }}</td>
       <td>{{ data['score'] }}</td>
     </tr>
   {% endfor %}

@@ -9,6 +9,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
+    <a href="/admin/promos">ТАБЛИЦЫ</a>
+    <a href="/profile">profile</a>
+
     <h1>добавить промо</h1>
     <form class="" action="/addPromo" method="post">
       <input type="number" name="count" value="1">
@@ -22,6 +25,9 @@
 
       <input type="number" name="score" value="">
       <label for="input">Очки</label><br>
+
+      <input type="number" name="loop" value="0">
+      <label for="input">Повторения</label><br>
 
       <select name="type" required>
         <option disabled>Выберите</option>
@@ -53,6 +59,7 @@
       <label for="input">Описание</label><br>
       <input type="submit" value="Подтв">
     </form>
+    addETask
     <h1>добавить новость</h1>
     <form class="" action="/addNews" method="post">
       <input type="text" name="title" value="">
@@ -61,5 +68,70 @@
       <label for="input">Описание</label><br>
       <input type="submit" value="Подтв">
     </form>
+    <h1>добавить доп. задание</h1>
+    <form class="" action="/addETask" method="post">
+
+      <input type="text" name="name" value="">
+      <label for="input">Заголовок</label><br>
+
+      <input type="submit" value="Подтв">
+    </form>
+    <br><br>
+    <h1>добавить тестовое задание</h1>
+    <form class="" action="/addTest" method="post">
+      <input type="text" name="quest" value="">
+      <label for="input">Текст вопроса</label><br>
+
+      <textarea style="width:80vw" name="otvets" rows="8" cols="80"></textarea>
+      <label for="input">Варианты ответа</label><br>
+
+      <input type="text" name="COtvets" value="">
+      <label for="input">Правильные ответы f 0100</label><br>
+
+      <input type="number" name="money" value="">
+      <label for="input">Монеты</label><br>
+
+      <input type="number" name="score" value="">
+      <label for="input">Очки</label><br>
+
+      <input type="submit" value="Подтв">
+    </form>
+    <br><br>
+    <h1>добавить Фразу</h1>
+    <form class="" action="/addVoter" method="post">
+      <input type="number" name="user_id" value="">
+      <label for="input">id пользователя</label><br>
+
+      <textarea style="width:80vw" name="text" rows="8" cols="80"></textarea>
+      <label for="input">Текст</label><br>
+
+      <input type="submit" value="Подтв">
+    </form>
+    <br><br>
+    <h1>Контроль дневных заданий</h1>
+    <form class="" action="/addControlday" method="post">
+      <label>
+        <input type="checkbox" name="day1" value="1">
+        day1
+      </label>
+      <label>
+        <input type="checkbox" name="day2" value="1">
+        day2
+      </label>
+      <label>
+        <input type="checkbox" name="day3" value="1">
+        day3
+      </label>
+      <label>
+        <input type="checkbox" name="day4" value="1">
+        day4
+      </label>
+      <label>
+        <input type="checkbox" name="day5" value="1">
+        day5
+      </label>
+      <input type="submit" value="Подтв">
+    </form>
+    <br><br>
   </body>
 </html>

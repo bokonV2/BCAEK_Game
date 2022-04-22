@@ -1,0 +1,17 @@
+{% extends "master.html" %}
+{% block content %}
+<link rel="stylesheet" href="/static/css/tests.css">
+<div class="message">Задание №{{ inform.id }}</div>
+<div class="task">{{ inform.quest }}</div>
+<div class="tests">
+  <form class="" action="/tests/{{ inform.id }}" method="post">
+    {% for i in inform.otvets.split("<>") %}
+    <label>
+      <input type="checkbox" name="{{ loop.index }}" value="1">
+      {{ i }}
+    </label>
+    {% endfor %}
+    <input type="submit" name="" value="Отправить">
+  </form>
+</div>
+{% endblock %}

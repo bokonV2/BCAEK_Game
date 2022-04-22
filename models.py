@@ -24,7 +24,7 @@ class Users(BaseModel):
     lost_score = IntegerField()
     lost_money = IntegerField()
     products = TextField()
-
+    voted = BooleanField()
 
 class Promo(BaseModel):
     promo = CharField()
@@ -33,6 +33,7 @@ class Promo(BaseModel):
     type = IntegerField()
     description = TextField()
     user_id = IntegerField()
+    loop = BooleanField()
 
 
 class News(BaseModel):
@@ -47,8 +48,38 @@ class Products(BaseModel):
     description = TextField()
 
 
+class Tests(BaseModel):
+    quest = TextField()
+    otvets = TextField()
+    COtvets = TextField()
+    score = IntegerField()
+    money = IntegerField()
+    users = TextField()
+
+
+class ETasks(BaseModel):
+    name = TextField()
+
+
+class Votes(BaseModel):
+    user_id = IntegerField()
+    text = TextField()
+    count = IntegerField()
+
+
+class DayControl(BaseModel):
+    day1 = BooleanField(default=False)
+    day2 = BooleanField(default=False)
+    day3 = BooleanField(default=False)
+    day4 = BooleanField(default=False)
+    day5 = BooleanField(default=False)
+
 if __name__ == '__main__':
     Users.create_table()
     Promo.create_table()
     News.create_table()
     Products.create_table()
+    Tests.create_table()
+    ETasks.create_table()
+    Votes.create_table()
+    DayControl.create_table()

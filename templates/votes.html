@@ -1,0 +1,58 @@
+{% extends "master.html" %}
+{% block content %}
+<link rel="stylesheet" href="/static/css/votes.css">
+<div class="message">Голосование</div>
+<div class="item">
+  <span> № </span>
+  <span> Участник </span>
+  <span> Фраза </span>
+  <span> Голоса </span>
+</div>
+{% if is_voted.voted %}
+  {% for i in votes %}
+    <hr>
+    <div class="item">
+      <span>
+        {{ i.id }}
+      </span>
+      <img src="{{ i.users.image }}">
+      <span>
+        {{ i.users.lastname }}
+        {{ i.users.name }}
+      </span>
+      <span>
+        {{ i.count }}
+      </span>
+    </div>
+    <div class="txt">
+      <span>
+        {{ i.text }}
+      </span>
+    </div>
+
+  {% endfor %}
+{% else %}
+  {% for i in votes %}
+    <hr>
+    <div class="item">
+      <span>
+        {{ i.id }}
+      </span>
+      <img src="{{ i.users.image }}">
+      <span>
+        {{ i.users.lastname }}
+        {{ i.users.name }}
+      </span>
+      <span>
+        <a href="/vote/{{ i.id }}">Голосовать</a>
+      </span>
+    </div>
+    <div class="txt">
+      <span>
+        {{ i.text }}
+      </span>
+    </div>
+  {% endfor %}
+
+{% endif %}
+{% endblock %}

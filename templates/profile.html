@@ -4,7 +4,7 @@
 <script src="/static/js/level.js" type="text/javascript"></script>
 <div class="acount">
   <img src="{{ inform.image }}">
-  <span>{{ inform.lastname }} {{ inform.name }}</span>
+  <span>{{ inform.lastname|safe }} {{ inform.name }}</span>
 </div>
 <div class="level">
   <div id="cont" data-pct="{{ inform.score // 100 }}" data-xp="{{ inform.score % 100 }}">
@@ -39,8 +39,8 @@
 <div class="stats">
   Завершенно:
   <table>
-    <tr><td>Ежедневных событий:</td><td>{{ inform.day_task }}</td></tr>
-    <tr><td>Ежедневных заданий:</td><td>{{ inform.day_events }}</td></tr>
+    <tr><td>Ежедневных событий:</td><td>{{ inform.day_events }}</td></tr>
+    <tr><td>Ежедневных заданий:</td><td>{{ inform.day_task }}</td></tr>
     <tr><td>Промокодов:</td><td>{{ inform.promo }}</td></tr>
   </table>
 </div>

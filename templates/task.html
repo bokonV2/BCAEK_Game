@@ -4,19 +4,28 @@
 <div class="message">Список</div>
 <div class="task">
   <div class="title">Ежедневные события:</div>
-  <div class="item">1.</div>
-  <div class="item">2.</div>
-  <div class="item">3.</div>
-  <div class="item">4.</div>
+  {% if control.day1 %}
+    <a href="/eventD1"><div class="item">День №1</div></a>
+  {% endif %}
+  {% if control.day2 %}
+  <a href="/eventD2"><div class="item">День №2</div></a>
+  {% endif %}
+  {% if control.day3 %}
+  <a href="/eventD3"><div class="item">День №3</div></a>
+  {% endif %}
+  {% if control.day4 %}
+  <a href="/eventD4"><div class="item">День №4</div></a>
+  {% endif %}
+  {% if control.day5 %}
+  <a href="/eventD5"><div class="item">День №5</div></a>
+  {% endif %}
   <div class="title">Ежедневные задания:</div>
-  <div class="item">1.</div>
-  <div class="item">2.</div>
-  <div class="item">3.</div>
-  <div class="item">4.</div>
+  {% for i in tests %}
+  <a href="/tests/{{ i.id }}"><div class="item">Задание №{{ i.id }}</div></a>
+  {% endfor %}
   <div class="title">Дополнительные задания:</div>
-  <div class="item">1.</div>
-  <div class="item">2.</div>
-  <div class="item">3.</div>
-  <div class="item">4.</div>
+  {% for i in ETasks %}
+  <div class="item">{{ loop.index }}. {{ i.name }}</div>
+  {% endfor %}
 </div>
 {% endblock %}

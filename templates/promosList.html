@@ -2,34 +2,76 @@
 <html lang="ru" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Profile</title>
+    <title>Tables</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=0">
   </head>
+  <style media="screen">
+    table{
+      border-collapse: collapse;
+    }
+    tr, td, th{
+      border: 1px solid black;
+    }
+  </style>
   <body>
-<h1>Таблица лидеров</h1>
-<table>
-  <thead>
-    <th>id</th>
-    <th>Код</th>
-    <th>Монеты</th>
-    <th>Очки</th>
-    <th>Описание</th>
+<a href="/admin">ДОМООЙ</a>
+<div style="display:flex;flex-direction:row;justify-content: space-around;">
+  <div class="">
 
-  </thead>
-  {% for data in inform %}
-    <tr>
-      <td>{{ data['id'] }}</td>
+    <h1>Таблица промо</h1>
+    <table>
+      <thead>
+        <th>id</th>
+        <th>Код</th>
+        <th>Монеты</th>
+        <th>Очки</th>
+        <th>Описание</th>
 
-      <td>{{ data['promo'] }}</td>
-      <td>{{ data['score'] }}</td>
-      <td>{{ data['money'] }}</td>
-      <td>{{ data['description'] }}</td>
-      <td>{{ data['user_id'] }}</td>
+      </thead>
+      {% for data in inform %}
+      <tr>
+        <td>{{ data['id'] }}</td>
 
-    </tr>
-  {% endfor %}
-</table>
+        <td>{{ data['promo'] }}</td>
+        <td>{{ data['score'] }}</td>
+        <td>{{ data['money'] }}</td>
+        <td>{{ data['description'] }}</td>
+        <td>{{ data['user_id'] }}</td>
+
+      </tr>
+      {% endfor %}
+    </table>
+
+  </div>
+  <div class="">
+    <h1>Таблица участников</h1>
+    <table>
+      <thead>
+        <th>vk_id</th>
+        <th>Фамилия имя</th>
+        <th>Очки</th>
+        <th>монеты</th>
+        <th>куплено</th>
+        <th>голосовал</th>
+
+
+      </thead>
+      {% for data in usertabl %}
+      <tr>
+        <td>{{ data.vk_id }}</td>
+        <td>{{ data.lastname }} {{ data.name }}</td>
+        <td>{{ data.score }}</td>
+        <td>{{ data.money }}</td>
+        <td>{{ data.products }}</td>
+        <td>{{ data.voted }}</td>
+
+      </tr>
+      {% endfor %}
+    </table>
+
+  </div>
+</div>
 </body>
 </html>

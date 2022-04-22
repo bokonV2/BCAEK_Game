@@ -1,0 +1,23 @@
+{% extends "master.html" %}
+{% block content %}
+<link rel="stylesheet" href="/static/css/event.css">
+<div class="message">День 3</div>
+
+<div class="code"> Что выведет это программа: <br><br>
+  int a1 = 25;<br>
+  int a2 = 7;<br>
+  int a3 = a1 * a2;<br>
+  int a4 = a3 / a2;<br>
+  Console.Write($"{a3}:{a2}=");<br>
+  int a5 = int.Parse(Console.ReadLine());<br>
+  if (a5 == a1)<br>
+  {<br>
+    &nbspConsole.WriteLine($"Правильно!");<br>
+  }<br>
+  else Console.WriteLine($"Вы ошиблись!");<br>
+</div>
+<form action="/eventD3_2" method="post">
+  <input type="text" name="code" value="">
+  <input type="submit" class="homeBTN" value="Отправить">
+</form>
+{% endblock %}
