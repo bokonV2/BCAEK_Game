@@ -15,15 +15,94 @@ redirect_uri = "https://6954-178-168-218-53.ngrok.io/aut"
 site_url="http://192.168.43.134:8000"
 symb=tuple('--abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890')
 
+
+def add_controlday(form):
+    otv = []
+    for i in range(1, 6):
+        otv.append(form.get(f"day{i}"))
+    otv = list(map(lambda x: False if x == None else True, otv))
+    control = get_dayControl()
+    control.day1 = otv[0]
+    control.day2 = otv[1]
+    control.day3 = otv[2]
+    control.day4 = otv[3]
+    control.day5 = otv[4]
+    control.save()
+
+def get_dayControl():
+    return DayControl.select().where(DayControl.id == 1).get()
+
+def get_tests():
+    return Tests.select()
+
+def get_test(id):
+    return Tests.select().where(Tests.id == id).get()
+
+def send_test(form, tests, user_id):
+    otv = []
+    for i in range(1, len(tests.otvets.split("<>"))+1):
+        otv.append(form.get(str(i)))
+    otv = "".join(list(map(lambda x: "0" if x == None else "1", otv)))
+    if otv == tests.COtvets:
+        if tests.users == None:
+            tests.users = user_id
+        else:
+            tests.users = f"{tests.users},{user_id}"
+        tests.save()
+        complite(user_id, 3, tests.score, tests.money, tests.id)
+        return tests.score, tests.money, True
+    else:
+        if tests.users == None:
+            tests.users = user_id
+        else:
+            tests.users = f"{tests.users},{user_id}"
+        tests.save()
+        return False
+
 def genPromo(length=9):
     return ''.join([random.choice(symb) for x in range(length)])
-def add_promo(count,code,score, money, type,description):
+
+def add_ETask(form):
+    ETasks.create(**form)
+
+def is_voted(id):
+    return Users.select(Users.voted).where(Users.vk_id == id).get()
+
+def get_votes():
+    return Votes.select(Votes,Users.name,Users.lastname,Users.image,Users.voted).join(
+        Users, on = (Votes.user_id == Users.vk_id)
+    )
+
+def add_vote(user_id, id):
+    vote = Votes.select().where(Votes.id == id).get()
+    vote.count += 1
+    user = Users.select().where(Users.vk_id == user_id).get()
+    user.voted = True
+    vote.save()
+    user.save()
+
+def get_users():
+    return Users.select()
+
+def add_voter(form):
+    Votes.create(**form)
+
+def get_ETasks():
+    return ETasks.select()
+
+def add_Test(form):
+    form=form.to_dict()
+    otvets = form['otvets'].split("\r\n")
+    form['otvets']='<>'.join(otvets)
+    Tests.create(**form)
+
+def add_promo(count, code, score, money, type, description, loop=0):
     Promo.create(
         promo = code, score = score,
         money = money, description = description,
-        type = type
+        type = type, loop=loop
     )
-    send_telegram_log(f'LOG:\nНовый промо\n{code}\n{score}:{money}\n{description}')
+    send_telegram_log(f'LOG:\nНовый промо\n{code}\n{score}:{money}\n{description}\nloop:{loop}')
 
 def add_promos(form):
     count = int(form.get("count"))
@@ -80,7 +159,7 @@ def by_shop(user_id, id):
 def check_promo(user_id, code):
     try:
         promo = Promo.get(promo=code)
-        if promo.user_id != None:
+        if promo.user_id != None and promo.loop == 0:
             type = 6
             complite(user_id, type, promo.score, promo.money, promo)
             return (promo.score * -0.5, promo.money * -0.5, False)
@@ -104,17 +183,19 @@ def complite(user_id, id, score, money, promo):
         user.bigQG += 1
     elif id == 3: # day_task
         user.day_task += 1
+        send_telegram_log(f"LOG:\n{user.name} {user.lastname} Выполнил задание №{promo}")
     elif id == 4: # day_events
         user.day_events += 1
+        send_telegram_log(f"LOG:\n{user.name} {user.lastname} Завершил {promo}")
     elif id == 5: # promo
         user.promo += 1
+        send_telegram_log(f"LOG:\n{user.name} {user.lastname} Активировал код {promo.promo} ({promo.description})")
     elif id == 6: # lost
         user.lost_score -= score * 0.5
         user.lost_money -= money * 0.5
         user.score -= score * 1.5
         user.money -= money * 1.5
     user.save()
-    send_telegram_log(f"LOG:\n{user.name} {user.lastname} Активировал код {promo.promo} ({promo.description})")
 
 def get_user_id(code):
     response = requests.get(f'https://oauth.vk.com/access_token?client_id={client_id}&client_secret={client_secret}&redirect_uri={redirect_uri}&code={code}')

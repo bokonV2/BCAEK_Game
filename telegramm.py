@@ -38,10 +38,10 @@ def send_telegram_log(text):
     channel_id = "@bcaek_game"
     url += token
     method = url + "/sendMessage"
-    # r = requests.post(method, data={
-    #      "chat_id": channel_id,
-    #      "text": text
-    #       })
+    r = requests.post(method, data={
+         "chat_id": channel_id,
+         "text": text
+          })
 
 if __name__ == '__main__':
   # send_telegram("hello world!")

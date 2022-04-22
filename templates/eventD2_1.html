@@ -1,0 +1,102 @@
+{% extends "master.html" %}
+{% block content %}
+<link rel="stylesheet" href="/static/css/event.css">
+<div class="message">День 2</div>
+<div class="password">Все любят кроссворды?</div>
+<br>
+<div class="kross">
+  <!-- 13x5 -->
+  <table>
+    <tbody>
+      <tr>
+        <td></td>
+        <td></td>
+        <td class="upDown left">1</td>
+        <td class="upDown">&nbsp&nbsp</td>
+        <td class="upDown key"></td>
+        <td class="upDown">&nbsp&nbsp</td>
+        <td class="upDown right">&nbsp&nbsp</td>
+        <td>&nbsp&nbsp</td>
+        <td>&nbsp&nbsp</td>
+        <td>&nbsp&nbsp</td>
+        <td>&nbsp&nbsp</td>
+        <td>&nbsp&nbsp</td>
+        <td>&nbsp&nbsp</td>
+      </tr>
+      <tr>
+        <td class="upDown left">2</td>
+        <td class="upDown"></td>
+        <td class="upDown"></td>
+        <td class="upDown"></td>
+        <td class="upDown key"></td>
+        <td class="upDown"></td>
+        <td class="upDown"></td>
+        <td class="upDown"></td>
+        <td class="upDown right"></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="upDown left">3</td>
+        <td class="upDown"></td>
+        <td class="upDown"></td>
+        <td class="upDown"></td>
+        <td class="upDown key"></td>
+        <td class="upDown right"></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td class="upDown left">4</td>
+        <td class="upDown"></td>
+        <td class="upDown"></td>
+        <td class="upDown right key"></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td class="upDown left key">5</td>
+        <td class="upDown"></td>
+        <td class="upDown"></td>
+        <td class="upDown"></td>
+        <td class="upDown"></td>
+        <td class="upDown"></td>
+        <td class="upDown"></td>
+        <td class="upDown"></td>
+        <td class="upDown right"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="hint2">
+1	Она бывает спутниковая но чаще всего сотовая<br><br>
+2	Целый день программист сидит что-то пишет а на выходе получается<br><br>
+3	Без него не войдеш в аккаунт или соц сеть<br><br>
+4	В интернете, в app сторе , в плеймаркете можно найти интересные увлекательные<br><br>
+5	После работы в аудитории не забудьте выключить
+
+</div>
+<br><br>
+<form action="/eventD2_4" method="post">
+  <input type="text" name="code" value="">
+  <input type="submit" class="homeBTN" value="Отправить">
+</form>
+{% endblock %}
