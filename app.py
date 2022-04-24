@@ -205,7 +205,7 @@ def welcome():
     if session['user_id']:
         return redirect('/profile')
     return render_template('welcome.html',
-        enter_url='https://oauth.vk.com/authorize?client_id=7982511&display=mobile&redirect_uri=https://6954-178-168-218-53.ngrok.io/aut&scope=offline&response_type=code&v=5.131')
+        enter_url='https://oauth.vk.com/authorize?client_id=7982511&display=mobile&redirect_uri=https://bokon2014.pythonanywhere.com/aut&scope=offline&response_type=code&v=5.131')
 
 @app.route('/profile')
 def profile():

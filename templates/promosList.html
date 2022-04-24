@@ -25,9 +25,11 @@
       <thead>
         <th>id</th>
         <th>Код</th>
-        <th>Монеты</th>
         <th>Очки</th>
+        <th>Монеты</th>
+        <th>тип</th>
         <th>Описание</th>
+        <th>повторения</th>
 
       </thead>
       {% for data in inform %}
@@ -37,8 +39,10 @@
         <td>{{ data['promo'] }}</td>
         <td>{{ data['score'] }}</td>
         <td>{{ data['money'] }}</td>
+        <td>{{ data['type'] }}</td>
         <td>{{ data['description'] }}</td>
         <td>{{ data['user_id'] }}</td>
+        <td>{{ data['loop'] }}</td>
 
       </tr>
       {% endfor %}
@@ -57,6 +61,7 @@
         <th>голосовал</th>
 
 
+
       </thead>
       {% for data in usertabl %}
       <tr>
@@ -66,6 +71,7 @@
         <td>{{ data.money }}</td>
         <td>{{ data.products }}</td>
         <td>{{ data.voted }}</td>
+
 
       </tr>
       {% endfor %}

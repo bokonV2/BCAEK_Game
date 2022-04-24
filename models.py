@@ -73,6 +73,11 @@ class DayControl(BaseModel):
     day3 = BooleanField(default=False)
     day4 = BooleanField(default=False)
     day5 = BooleanField(default=False)
+    golos = BooleanField(default=False)
+
+def delallfrtab(table):
+    for i in table.select():
+        i.delete_instance()
 
 if __name__ == '__main__':
     Users.create_table()
@@ -82,4 +87,9 @@ if __name__ == '__main__':
     Tests.create_table()
     ETasks.create_table()
     Votes.create_table()
+    # delallfrtab(Products)
+    # delallfrtab(Promo)
+    # delallfrtab(News)
+    # delallfrtab(Products)
+    # delallfrtab(ETasks)
     DayControl.create_table()

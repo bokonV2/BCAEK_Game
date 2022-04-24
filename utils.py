@@ -11,14 +11,13 @@ VKTOKEN = f"&access_token={TOKEN}&v={V}"
 
 client_id = 7982511
 client_secret = "NhpZrbytODiMUN2obpbv"
-redirect_uri = "https://6954-178-168-218-53.ngrok.io/aut"
-site_url="http://192.168.43.134:8000"
+redirect_uri = "https://bokon2014.pythonanywhere.com/aut"
 symb=tuple('--abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890')
 
 
 def add_controlday(form):
     otv = []
-    for i in range(1, 6):
+    for i in range(1, 7):
         otv.append(form.get(f"day{i}"))
     otv = list(map(lambda x: False if x == None else True, otv))
     control = get_dayControl()
@@ -27,6 +26,7 @@ def add_controlday(form):
     control.day3 = otv[2]
     control.day4 = otv[3]
     control.day5 = otv[4]
+    control.golos = otv[5]
     control.save()
 
 def get_dayControl():
@@ -97,17 +97,18 @@ def add_Test(form):
     Tests.create(**form)
 
 def add_promo(count, code, score, money, type, description, loop=0):
-    Promo.create(
+    prom = Promo(
         promo = code, score = score,
         money = money, description = description,
         type = type, loop=loop
     )
-    send_telegram_log(f'LOG:\nНовый промо\n{code}\n{score}:{money}\n{description}\nloop:{loop}')
+    prom.save()
+    send_telegram_log(f'LOG:\nНовый промо №{prom.id}\n{code}\n{score}:{money}\n{description}\nloop:{loop}')
 
 def add_promos(form):
     count = int(form.get("count"))
     count = 1 if count<=0 else count
-    count = 20 if count>20 else count
+
     if count==1:
         add_promo(**form)
     else:
@@ -177,10 +178,13 @@ def complite(user_id, id, score, money, promo):
     user.money += money
     if id == 0: # tinyQR
         user.tinyQR += 1
+        send_telegram_log(f"LOG:\n{user.name} {user.lastname} актив sml промо  №{promo.id} {promo.promo} {promo.description}")
     elif id == 1: # mediumQR
         user.mediumQR += 1
+        send_telegram_log(f"LOG:\n{user.name} {user.lastname} актив med промо  №{promo.id} {promo.promo} {promo.description}")
     elif id == 2: # bigQG
         user.bigQG += 1
+        send_telegram_log(f"LOG:\n{user.name} {user.lastname} актив big промо  №{promo.id} {promo.promo} {promo.description}")
     elif id == 3: # day_task
         user.day_task += 1
         send_telegram_log(f"LOG:\n{user.name} {user.lastname} Выполнил задание №{promo}")
@@ -225,6 +229,8 @@ def login(code):
             name = first_name,
             lastname = last_name,
             image = photo_200,
+            money = 50,
+            score = 50
         )
         send_telegram_log(f"LOG:\n{last_name} {first_name}: {user_id}, зарегался")
         return user_id

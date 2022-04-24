@@ -19,6 +19,9 @@
   {% if control.day5 %}
   <a href="/eventD5"><div class="item">День №5</div></a>
   {% endif %}
+  {% if control.golos %}
+  <a href="/vote"><div class="item">Голосование</div></a>
+  {% endif %}
   <div class="title">Ежедневные задания:</div>
   {% for i in tests %}
   <a href="/tests/{{ i.id }}"><div class="item">Задание №{{ i.id }}</div></a>
