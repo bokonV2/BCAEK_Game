@@ -9,8 +9,23 @@ app.secret_key = "dtrytujet6rrt64"
 
 
 ###### work
-
+# https://bokon2014.pythonanywhere.com/eventD1_2
+# https://bokon2014.pythonanywhere.com/eventD2_1
+# https://bokon2014.pythonanywhere.com/eventD2_2
+# https://bokon2014.pythonanywhere.com/eventD2_3
+# https://bokon2014.pythonanywhere.com/eventD2_4
+# https://bokon2014.pythonanywhere.com/eventD5_1
+# https://bokon2014.pythonanywhere.com/eventD5_2
+# https://bokon2014.pythonanywhere.com/eventD5_3
+# https://bokon2014.pythonanywhere.com/eventD5_4
+# https://bokon2014.pythonanywhere.com/eventD5_5
 ###### event
+
+@app.route('/timer/<int:num>')
+def timer(num):
+    if not session['user_id']:
+        return redirect('/welcome')
+    return render_template('timer.html', num=num)
 
 @app.route('/eventD1', methods=['GET', 'POST'])
 def eventD1():
@@ -30,7 +45,7 @@ def eventD1_2():
     print(inf.day_events)
     if inf.day_events < 1:
         complite(session['user_id'], 4, 50, 50, "день 1")
-    return render_template('eventD1_2.html', num=1)
+    return redirect('/timer/1')
 
 @app.route('/eventD2')
 def eventD2():
@@ -72,9 +87,10 @@ def eventD2_4():
         code = request.form.get('code')
         if code.lower() == 'ярлык':
             inf = get_inform_db(session['user_id'])
-            if inf.day_events < 3:
+            if inf.day_events < 2:
                 complite(session['user_id'], 4, 50, 50, "день 2")
-            return render_template('eventD1_2.html', num=2) ##### END DAY
+            # return render_template('eventD1_2.html', num=2)
+            return redirect('/timer/2') ##### END DAY
     return render_template('eventD2_1.html') ##### END DAY
 
 @app.route('/eventD3')
@@ -99,9 +115,10 @@ def eventD3_2():
         code = request.form.get('code')
         if code.lower() == '175:7=25':
             inf = get_inform_db(session['user_id'])
-            if inf.day_events < 4:
+            if inf.day_events < 3:
                 complite(session['user_id'], 4, 50, 50, "день 3")
-            return render_template('eventD1_2.html', num=3) ##### END DAY
+            # return render_template('eventD1_2.html', num=3) ##### END DAY
+            return redirect('/timer/3') ##### END DAY
     return render_template('eventD3_2.html')
 
 @app.route('/eventD4')
@@ -141,9 +158,10 @@ def eventD4_4():
     if not session['user_id']:
         return redirect('/welcome')
     inf = get_inform_db(session['user_id'])
-    if inf.day_events < 5:
+    if inf.day_events < 4:
         complite(session['user_id'], 4, 50, 50, "день 4")
-    return render_template('eventD1_2.html', num=4) ######END DAY
+    # return render_template('eventD1_2.html', num=4) ######END DAY
+    return redirect('/timer/4') ##### END DAY
 
 @app.route('/eventD5')
 def eventD5():
@@ -192,7 +210,7 @@ def eventD5_5():
     title = "Ждем вас на мероприятии «Подведение итогов»! "
     hint = Markup("Будьте начеку, там явно будут халявные QR-коды на money.")
     inf = get_inform_db(session['user_id'])
-    if inf.day_events < 6:
+    if inf.day_events < 5:
         complite(session['user_id'], 4, 50, 50, "день 5")
     return render_template('eventD5.html', title=title, hint=hint)
 
@@ -291,14 +309,21 @@ def tests(id):
             return render_template('complited.html')
     except:
         pass
+    if session.get(f'test{id}') == None:
+        session[f'test{id}'] = 3
+    else:
+        if session[f'test{id}'] == -1:
+            send_test_lost(session['user_id'], inform)
+            return render_template('complited.html')
     if request.method == 'POST':
         complite = send_test(request.form, inform, session['user_id'])
         if complite:
             session['score'], session['money'], session['status'] = complite
             return redirect('/confirmation')
         else:
-            return render_template('complited.html')
-    return render_template('tests.html', inform=inform)
+            session[f'test{id}'] -= 1
+            return render_template('tests.html', inform=inform, dont=True, times=session[f'test{id}'])
+    return render_template('tests.html', inform=inform, dont=False, times=session[f'test{id}'])
 
 @app.route('/news')
 def news():
@@ -410,10 +435,11 @@ def error(e):
 #     session['user_id'] = False
 #     return redirect('/welcome')
 
-# @app.before_request
-# def before_request():
-#     session['user_id'] = 262708494
-#     # session['user_id'] = 236657896
+@app.before_request
+def before_request():
+    session['user_id'] = None
+    # session['user_id'] = 236657896
+    # session['user_id'] = 262708494
 
 @app.before_first_request
 def before_first_request():

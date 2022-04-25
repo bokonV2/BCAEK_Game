@@ -38,6 +38,13 @@ def get_tests():
 def get_test(id):
     return Tests.select().where(Tests.id == id).get()
 
+def send_test_lost(user_id, tests):
+    if tests.users == None:
+        tests.users = user_id
+    else:
+        tests.users = f"{tests.users},{user_id}"
+    tests.save()
+
 def send_test(form, tests, user_id):
     otv = []
     for i in range(1, len(tests.otvets.split("<>"))+1):
@@ -93,14 +100,15 @@ def get_ETasks():
 def add_Test(form):
     form=form.to_dict()
     otvets = form['otvets'].split("\r\n")
-    form['otvets']='<>'.join(otvets)
+    form['otvets'] = '<>'.join(otvets)
     Tests.create(**form)
+    send_telegram_log(f'LOG:\nНовый тест {form["quest"]}\n{"<>".join(otvets)}\n{form["COtvets"]}\n{form["score"]}:{form["money"]}')
 
 def add_promo(count, code, score, money, type, description, loop=0):
     prom = Promo(
         promo = code, score = score,
         money = money, description = description,
-        type = type, loop=loop
+        type = type, loop=int(loop)
     )
     prom.save()
     send_telegram_log(f'LOG:\nНовый промо №{prom.id}\n{code}\n{score}:{money}\n{description}\nloop:{loop}')
@@ -160,17 +168,30 @@ def by_shop(user_id, id):
 def check_promo(user_id, code):
     try:
         promo = Promo.get(promo=code)
-        if promo.user_id != None and promo.loop == 0:
-            type = 6
-            complite(user_id, type, promo.score, promo.money, promo)
-            return (promo.score * -0.5, promo.money * -0.5, False)
-
-        promo.user_id = user_id
-        promo.save()
-        complite(user_id, promo.type, promo.score, promo.money, promo)
-        return (promo.score, promo.money, True)
     except DoesNotExist:
         return False
+
+    if promo.loop:
+        if not user_id in map(int, promo.users.split(",")):
+            if promo.users == None:
+                promo.users = user_id
+            else:
+                promo.users = f"{promo.users},{user_id}"
+            promo.save()
+            complite(user_id, type, promo.score, promo.money, promo)
+            return (promo.score, promo.money, True)
+        else:
+            return (0, 0, False)
+    else:
+        if promo.user_id != None:
+            complite(user_id, 6, promo.score, promo.money, promo)
+            return (promo.score * -0.5, promo.money * -0.5, False)
+        else:
+            promo.user_id = user_id
+            promo.save()
+            complite(user_id, type, promo.score, promo.money, promo)
+            return (promo.score, promo.money, True)
+
 
 def complite(user_id, id, score, money, promo):
     user = Users.select().where(Users.vk_id == user_id).get()

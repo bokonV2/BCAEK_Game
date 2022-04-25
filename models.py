@@ -34,6 +34,7 @@ class Promo(BaseModel):
     description = TextField()
     user_id = IntegerField()
     loop = BooleanField()
+    users = TextField()
 
 
 class News(BaseModel):
@@ -55,6 +56,7 @@ class Tests(BaseModel):
     score = IntegerField()
     money = IntegerField()
     users = TextField()
+    times = IntegerField()
 
 
 class ETasks(BaseModel):
@@ -80,16 +82,19 @@ def delallfrtab(table):
         i.delete_instance()
 
 if __name__ == '__main__':
-    Users.create_table()
-    Promo.create_table()
-    News.create_table()
-    Products.create_table()
-    Tests.create_table()
-    ETasks.create_table()
-    Votes.create_table()
-    # delallfrtab(Products)
-    # delallfrtab(Promo)
-    # delallfrtab(News)
-    # delallfrtab(Products)
-    # delallfrtab(ETasks)
-    DayControl.create_table()
+    # Users.create_table()
+    # Promo.create_table()
+    # News.create_table()
+    # Products.create_table()
+    # Tests.create_table()
+    # ETasks.create_table()
+    # Votes.create_table()
+    # # delallfrtab(Products)
+    # # delallfrtab(Promo)
+    # # delallfrtab(News)
+    # # delallfrtab(Products)
+    # # delallfrtab(ETasks)
+    # DayControl.create_table()
+    for i in Promo.select():
+        i.users = 0
+        i.save()

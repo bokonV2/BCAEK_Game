@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="/static/css/tests.css">
 <div class="message">Задание №{{ inform.id }}</div>
 <div class="task">{{ inform.quest }}</div>
+<div class="task">Попыток: {{ times }}</div>
 <div class="tests">
   <form class="" action="/tests/{{ inform.id }}" method="post">
     {% for i in inform.otvets.split("<>") %}
@@ -13,5 +14,8 @@
     {% endfor %}
     <input type="submit" name="" value="Отправить">
   </form>
+  {% if dont %}
+    <div class="task">Ответ не верный</div>
+  {% endif %}
 </div>
 {% endblock %}
